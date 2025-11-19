@@ -1,0 +1,7 @@
+# Ignorar archivos sensibles en dupont/auth
+dupont/auth/credenciales.json
+dupont/auth/token.json
+
+# Ignorar archivos sensibles en dupont/data
+dupont/data/email-sender-credentials.json
+dupont/data/token.json
