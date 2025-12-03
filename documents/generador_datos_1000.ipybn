@@ -1,0 +1,126 @@
+from spanish_dni.generator import generate_dni
+from faker import Faker
+import random
+import unidecode
+import pandas as pd
+
+fake = Faker('es_ES')
+
+# Generador de teléfono
+def telefono_es():
+    # prefijo '6' con probabilidad 85%, y los otros (71, 72, 74) con 15% en total
+    prefijo = random.choices(
+        population=['6', '71', '72', '74'],
+        weights=[85, 5, 5, 5],
+        k=1
+    )[0]
+
+    resto = ''.join(str(random.randint(0,9)) for _ in range(8 - len(prefijo)))
+    return prefijo + resto
+
+
+# Generador de cuenta bancaria
+
+# lista completa de códigos de entidades financieras en españa
+# Fuente: https://www.seg-social.es/wps/wcm/connect/wss/adb21737-2a8b-44ad-94ed-9ca85c9f4309/LISTADO+COLABORADORES+%2827_10_2025%29.pdf?MOD=AJPERES
+entidades = [
+    "0019","0049","0030","0072","0229","0075","0238","0061","0073","0078","0081",
+    "0128","0131","0133","0182","0186","0198","0216","0234","0235","0237","0239",
+    "1465","1491","1550","2045","2048","2056","2080","2085","2095","2100","2103",
+    "3001","3005","3007","3008","3009","3016","3017","3018","3020","3023","3025",
+    "3029","3035","3045","3058","3059","3060","3067","3070","3076","3080","3081",
+    "3085","3089","3095","3096","3098","3102","3104","3105","3110","3111","3112",
+    "3113","3115","3117","3118","3119","3121","3123","3127","3130","3134","3135",
+    "3138","3140","3144","3150","3152","3157","3159","3160","3162","3165","3166",
+    "3174","3179","3183","3187","3190","3191"
+]
+
+# Pesos para el cálculo del dígito de control IBAN según la norma ISO 13616
+
+pesos = [1, 2, 4, 8, 5, 10, 9, 7, 3, 6]
+
+# Calcular dígito de control (DC)
+
+def calcular_dc(parte):
+    suma = sum(int(parte[i]) * pesos[i] for i in range(10))
+    resto = suma % 11
+    dc = 11 - resto
+    return "1" if dc == 10 else "0" if dc == 11 else str(dc)
+
+# Genera un código cuenta cliente español (CCC)
+def generar_ccc():
+    entidad = random.choice(ENTIDADES)
+    oficina = f"{random.randint(0, 9999):04d}"
+    cuenta = f"{random.randint(0, 9999999999):010d}"
+
+    dc1 = calcular_dc("00" + entidad + oficina)  # DC sobre entidad+oficina
+    dc2 = calcular_dc(cuenta)                     # DC sobre cuenta
+
+    # CCC completo (20 dígitos)
+    return entidad + oficina + dc1 + dc2 + cuenta
+
+# Genera IBAN desde el CCC
+def generar_iban_desde_ccc(ccc):
+    # Añadir ES00 (temporal)
+    base = ccc + "142800"
+
+    # Cálculo módulo 97
+    dc = 98 - (int(base) % 97)
+    dc = f"{dc:02d}"
+
+    return f"ES{dc}{ccc}" 
+
+# Genera números aleatorios para completar la cuenta bancaria
+def cuenta_bancaria():
+    entidad = random.choice(list(bancos.values()))
+    resto = "".join(str(random.randint(0, 9)) for _ in range(20))  
+    return entidad + resto
+
+# Genera cuenta bancaria al completo
+def generar_cuenta_bancaria():
+    ccc = generar_ccc()
+    iban = generar_iban_desde_ccc(ccc)
+    return iban
+
+# Generador de email vinculado a nombre
+def generar_email(nombre, apellido1):
+    dominios = ["gmail.com", "hotmail.es", "yahoo.com", "outlook.com", "empresa.org"]
+    nombre_clean = unidecode.unidecode(nombre.lower().replace(" ", "."))   # sin espacios
+    apellido_clean = unidecode.unidecode(apellido1.lower().replace(" ", ""))  # sin espacios
+    return f"{nombre_clean}.{apellido_clean}{random.randint(1,99)}@{random.choice(dominios)}"
+
+
+# Generador de nombre con dos apellidos
+def generar_nombre_completo():
+    nombre = fake.first_name()
+    apellido1 = fake.last_name()
+    apellido2 = fake.last_name()
+    return nombre, apellido1, apellido2
+
+# Generar dataset
+def generar_dataset(n=1000):
+    registros = []
+    for _ in range(n):
+        nombre, apellido1, apellido2 = generar_nombre_completo()
+
+        # Escoger aleatoriamente si será DNI o NIE
+        if random.random() < 0.85:
+            documento = generate_dni()
+            tipo_doc = "DNI"
+        else:
+            documento = generate_dni(is_nie=True)
+            tipo_doc = "NIE"
+
+        registros.append({
+            'documento': documento,
+            'telefono': telefono_es(),
+            'email': generar_email(nombre, apellido1),
+            'cuenta_bancaria': cuenta_bancaria(),
+            'nombre': f"{nombre} {apellido1} {apellido2}",
+            'ciudad': fake.city()
+        })
+
+    return pd.DataFrame(registros)
+
+
+data = generar_dataset(1000)
