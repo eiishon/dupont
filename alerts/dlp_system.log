@@ -1,0 +1,29 @@
+2026-01-05 14:18:51,045 - INFO - Iniciando análisis de alertas sobre: data/sensitive_data.csv
+2026-01-05 14:18:51,050 - INFO - Alertas encontradas: {'dni': 168, 'numero': 432, 'iban': 210, 'nombre': 212, 'nie': 38, 'email': 227}. Procediendo a enviar correo...
+2026-01-05 14:18:51,467 - INFO - Correo enviado a main.dupont.tfg@gmail.com: Alerta DLP: Resumen de datos sensibles
+2026-01-05 14:23:30,494 - INFO - Ejecutando verificación de alertas para: data/sensitive_data.csv
+2026-01-05 14:23:30,512 - INFO - ALERTA: 1302 incidencias detectadas (Umbral: 1)
+2026-01-05 14:26:48,857 - INFO - ALERTA: 1312 incidencias. Enviando reporte con LOG.
+2026-01-05 15:58:18,677 - INFO - ALERTA: 1532 incidencias. Enviando reporte con LOG.
+2026-01-06 10:32:41,994 - INFO - ALERTA: 1579 incidencias. Enviando reporte con LOG.
+2026-01-06 10:36:06,700 - INFO - ALERTA: 1579 incidencias. Enviando reporte con LOG.
+2026-01-06 10:44:54,343 - INFO - Iniciando análisis de alertas sobre: data/sensitive_data.csv
+2026-01-06 10:44:54,369 - INFO - Alertas encontradas: {'numero': 523, 'email': 277, 'nombre': 263, 'iban': 255, 'dni': 216, 'nie': 45}. Procediendo a enviar correo...
+2026-01-06 10:44:54,369 - INFO - ALERTA: 1579 incidencias detectadas (Umbral: 1)
+2026-01-06 10:44:55,144 - INFO - Correo enviado a main.dupont.tfg@gmail.com: Alerta DLP: Resumen de datos sensibles
+2026-01-07 08:16:49,142 - INFO - Iniciando análisis de alertas sobre: data/sensitive_data.csv
+2026-01-07 08:16:49,285 - INFO - Alertas encontradas: {'numero': 523, 'email': 277, 'nombre': 263, 'iban': 255, 'dni': 216, 'nie': 45}. Procediendo a enviar correo...
+2026-01-07 08:16:49,286 - INFO - ALERTA: 1579 incidencias detectadas (Umbral: 1)
+2026-01-07 08:16:50,066 - INFO - Correo enviado a main.dupont.tfg@gmail.com: Alerta DLP: Resumen de datos sensibles
+2026-01-07 12:27:10,870 - INFO - Iniciando análisis de alertas sobre: data/sensitive_data.csv
+2026-01-07 12:27:10,905 - INFO - Alertas encontradas: {'numero': 641, 'email': 341, 'nombre': 321, 'iban': 313, 'dni': 266, 'nie': 53}. Procediendo a enviar correo...
+2026-01-07 12:27:10,905 - INFO - ALERTA: 1935 incidencias detectadas (Umbral: 1)
+2026-01-07 12:27:11,759 - INFO - Correo enviado a main.dupont.tfg@gmail.com: Alerta DLP: Resumen de datos sensibles
+2026-01-07 23:40:38,541 - INFO - Iniciando análisis de alertas sobre: data/sensitive_data.csv
+2026-01-07 23:40:38,641 - INFO - Alertas encontradas: {'numero': 701, 'email': 372, 'nombre': 357, 'iban': 343, 'dni': 297, 'nie': 54}. Procediendo a enviar correo...
+2026-01-07 23:40:38,642 - INFO - ALERTA: 2124 incidencias detectadas (Umbral: 1)
+2026-01-07 23:40:39,596 - INFO - Correo enviado a main.dupont.tfg@gmail.com: Alerta DLP: Resumen de datos sensibles
+2026-01-08 00:20:41,858 - INFO - Iniciando análisis de alertas sobre: data/sensitive_data.csv
+2026-01-08 00:20:41,868 - INFO - Alertas encontradas: {'numero': 761, 'email': 402, 'nombre': 384, 'iban': 371, 'dni': 315, 'nie': 59}. Procediendo a enviar correo...
+2026-01-08 00:20:41,869 - INFO - ALERTA: 2292 incidencias detectadas (Umbral: 1)
+2026-01-08 00:20:42,790 - INFO - Correo enviado a main.dupont.tfg@gmail.com: Alerta DLP: Resumen de datos sensibles
